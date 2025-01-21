@@ -1,4 +1,5 @@
 import { SentimentData } from "../types/sentiment";
+import Chart from "./components/Chart";
 
 async function getSentimentData(): Promise<SentimentData[]> {
 	const res = await fetch(
@@ -24,17 +25,9 @@ export default async function Home() {
 			{sentimentData.length === 0 ? (
 				<p className="text-center text-gray-600">No Data Found</p>
 			) : (
-				<ul className="mt-5 space-y-3">
-					{sentimentData.map((entry, index) => (
-						<li
-							key={index}
-							className="p-4 bg-white rounded-lg shadow-md hover:bg-gray-50"
-						>
-							<span className="font-semibold">Date:</span> {entry.datetime} |{" "}
-							<span className="font-semibold">Value:</span> {entry.value}
-						</li>
-					))}
-				</ul>
+				<div className="mt-8">
+					<Chart data={sentimentData} />
+				</div>
 			)}
 		</div>
 	);
